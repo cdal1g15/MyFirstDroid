@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void onButtonTapCredits(View view){
+        //show message to display credits
         String newline = System.getProperty("line.separator");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Credits");

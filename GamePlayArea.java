@@ -25,6 +25,7 @@ public class GamePlayArea extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play_area);
+        // Add all cards to an array
         cards.addAll(Arrays.asList(
                 R.drawable.ac, R.drawable.ad,R.drawable.ah,R.drawable.as,
                 R.drawable.kc,R.drawable.kd,R.drawable.kh,R.drawable.ks,
@@ -41,6 +42,7 @@ public class GamePlayArea extends AppCompatActivity {
                 R.drawable.card2c,R.drawable.card2d,R.drawable.card2h,R.drawable.card2s));
         ImageView imageView2 = findViewById(R.id.imageView2);
         int a = chooseCard();
+        //Show random card and remove it from deck
         imageView2.setImageResource(cards.get(a));
         cards.remove(a);
     }
@@ -49,6 +51,7 @@ public class GamePlayArea extends AppCompatActivity {
         wrongCount++;
         ImageView imageView2 = findViewById(R.id.imageView2);
         int a = chooseCard();
+        //Show random card and remove it from deck
         imageView2.setImageResource(cards.get(a));
         cards.remove(a);
 
@@ -58,12 +61,14 @@ public class GamePlayArea extends AppCompatActivity {
         rightCount++;
         ImageView imageView2 = findViewById(R.id.imageView2);
         int a = chooseCard();
+        //Show random card and remove it from deck
         imageView2.setImageResource(cards.get(a));
         cards.remove(a);
 
     }
 
     protected void onButtonTapLeave(View view){
+        //Show current score and if the user wants to quit
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("End Game?");
         builder.setMessage("Well done, you got " + rightCount +
@@ -80,17 +85,21 @@ public class GamePlayArea extends AppCompatActivity {
     }
 
     public int chooseCard(){
+        //Show message to explain deck is empty
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Deck Empty");
         builder.setMessage("New deck of cards, you current have " + rightCount
                 + " correct answers");
         AlertDialog dialog = builder.create();
         if(cards.isEmpty()){
+            //refill card deck
            cards.addAll(discarded);
            discarded.removeAll(discarded);
 
            dialog.show();
         }
+
+        //random number generator for choosing card
         Random random = new Random();
         int  n = random.nextInt(cards.size());
         discarded.add(cards.get(n));
